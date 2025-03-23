@@ -23,7 +23,10 @@ function App() {
         <div className="app">
           <Navbar />
           <main className="container mx-auto px-4 py-8">
-            <Routes basename="/printingPress">
+            <Routes
+              basename="/printingPress"
+              future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
+            >
               {/* Admin Routes */}
               <Route path="/admin/*" element={<Admin />} />
 
