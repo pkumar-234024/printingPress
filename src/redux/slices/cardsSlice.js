@@ -3,7 +3,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 // Mock function to simulate API call for fetching cards
 const fetchCardsAPI = async () => {
   try {
-    const response = await fetch("http://localhost:57679/Product", {
+    const response = await fetch("https://rajshreepress.runasp.net/Product", {
       method: "GET",
       headers: {
         accept: "application/json",
@@ -46,7 +46,7 @@ const addCardAPI = async (card) => {
     console.log("Uploading image...");
 
     // ✅ First API Call: Upload Image
-    const uploadResponse = await fetch("http://localhost:57679/uploadimage", {
+    const uploadResponse = await fetch("https://rajshreepress.runasp.net/uploadimage", {
       method: "POST",
       headers: {
         accept: "application/json",  // ✅ No 'Content-Type' for FormData
@@ -63,7 +63,7 @@ const addCardAPI = async (card) => {
     // ✅ Second API Call: uploadimages
     console.log("Calling second API: uploadimages...");
 
-    const secondResponse = await fetch("http://localhost:57679/Product", {
+    const secondResponse = await fetch("https://rajshreepress.runasp.net/Product", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
