@@ -15,7 +15,9 @@ const fetchCardsAPI = async () => {
     }
 
     const cards = await response.json();
-    const formattedCards = transformCards(cards); // Ensures you can inspect formattedCards before returning
+    const formattedCards = transformCards(cards); 
+    //cards = formattedCards;
+    // Ensures you can inspect formattedCards before returning
     return formattedCards; // ✅ No need to wrap in a new Promise
 
   } catch (error) {
@@ -89,7 +91,28 @@ const addCardAPI = async (card) => {
   }
 };
 
+ const fetchCardsAPIById = async () => {
+    try {
+      const response = await fetch("http://localhost:57679/Product", {
+        method: "GET",
+        headers: {
+          accept: "application/json",
+        },
+        body: JSON.stringify(id),
+      });
 
+      if (!response.ok) {
+        throw new Error("Failed to fetch cards from API");
+      }
+      debugger;
+      const cards = await response.json();
+      const formattedCards = transformCards(cards); // Ensures you can inspect formattedCards before returning
+      return formattedCards; // ✅ No need to wrap in a new Promise
+    } catch (error) {
+      console.error("Error fetching cards:", error);
+      return []; // Return an empty array in case of an error
+    }
+  };
 
 
 export const fetchCards = createAsyncThunk("cards/fetchCards", async () => {
@@ -99,6 +122,12 @@ export const fetchCards = createAsyncThunk("cards/fetchCards", async () => {
 
 export const addCard = createAsyncThunk("cards/addCard", async (card) => {
   const response = await addCardAPI(card);
+  return response;
+});
+
+
+export const fetchCardById = createAsyncThunk("cards/fetchCards", async () => {
+  const response = await fetchCardsAPI();
   return response;
 });
 

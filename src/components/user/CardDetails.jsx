@@ -11,7 +11,7 @@ const CardDetails = () => {
   const { cards } = useSelector((state) => state.cards);
   console.log(cards);
   debugger;
-  const card = cards.find((card) => card.id === id);
+  const card = cards.find((card) => card.id === Number(id));
 
   const [quantity, setQuantity] = useState(card ? card.minimumOrder : 1);
   const [message, setMessage] = useState("");
