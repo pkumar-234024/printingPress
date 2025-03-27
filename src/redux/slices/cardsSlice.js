@@ -1,9 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
+const base_url = "https://rajshreepress.runasp.net";
+//const base_url = "http://localhost:57679";
 // Mock function to simulate API call for fetching cards
 const fetchCardsAPI = async () => {
   try {
-    const response = await fetch("https://rajshreepress.runasp.net/Product", {
+    const response = await fetch(`${base_url}/Product`, {
       method: "GET",
       headers: {
         accept: "application/json",
@@ -46,7 +48,7 @@ const addCardAPI = async (card) => {
     console.log("Uploading image...");
 
     // ✅ First API Call: Upload Image
-    const uploadResponse = await fetch("https://rajshreepress.runasp.net/uploadimage", {
+    const uploadResponse = await fetch(`${base_url}/uploadimage`, {
       method: "POST",
       headers: {
         accept: "application/json",  // ✅ No 'Content-Type' for FormData
@@ -63,7 +65,7 @@ const addCardAPI = async (card) => {
     // ✅ Second API Call: uploadimages
     console.log("Calling second API: uploadimages...");
 
-    const secondResponse = await fetch("https://rajshreepress.runasp.net/Product", {
+    const secondResponse = await fetch(`${base_url}/Product`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -91,9 +93,9 @@ const addCardAPI = async (card) => {
   }
 };
 
- const fetchCardsAPIById = async () => {
+ const fetchCardsAPIById = async (id) => {
     try {
-      const response = await fetch("http://localhost:57679/Product", {
+      const response = await fetch(`${base_url}/Product/${id}`, {
         method: "GET",
         headers: {
           accept: "application/json",
@@ -104,7 +106,6 @@ const addCardAPI = async (card) => {
       if (!response.ok) {
         throw new Error("Failed to fetch cards from API");
       }
-      debugger;
       const cards = await response.json();
       const formattedCards = transformCards(cards); // Ensures you can inspect formattedCards before returning
       return formattedCards; // ✅ No need to wrap in a new Promise
